@@ -9,6 +9,7 @@ conform.setup({
 
 		-- Use a sub-list to run only the first available formatter
 		javascript = { "prettier" },
+		html = { "prettier" },
 
 		typescript = { "prettier" },
 
@@ -22,8 +23,13 @@ conform.setup({
 
 		rust = { "rustfmt" },
 
-        dart = { "dart_format" },
+		dart = { "dart_format" },
 
-        php = { "php-cs-fixer" },
+		php = { "pretty-php" },
 	},
+
+	format_after_save = {
+		lsp_format = "fallback",
+	},
+	notify_no_formatters = true,
 })

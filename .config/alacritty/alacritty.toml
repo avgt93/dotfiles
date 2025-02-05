@@ -38,7 +38,7 @@ text = "0x1c1f24"
 TERM = "xterm-256color"
 
 [font]
-size = 10.5
+size = 7.5
 
 [font.bold]
 family = "iosevka Nerd Font"

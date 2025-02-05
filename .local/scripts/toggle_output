@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the current active sink
-current_sink=$(pacmd list-sinks | grep '* index' | awk '{print $3}')
+current_sink=$(pacmd list-sinks | grep '* index'  | awk '{print $3}')
 
 # Define the sink you want to toggle to
 toggle_sink=1  # Change this to the index of the USB-Audio sink (1 in your case)

@@ -1,0 +1,94 @@
+{
+  "chrs": {
+    "prefix": "chrs",
+    "body": [
+      "private function checkResponseStatus() {",
+      "    \\$ch = \\$this->getCurlHandle();",
+      "    \\$info = curl_getinfo(\\$ch);",
+      "    print ('Status code : ' . \\$info['http_code'] . ' received' . PHP_EOL);",
+      "    if (!empty(\\$info) && \\$info['http_code'] == '200') {",
+      "        return true;",
+      "    }",
+      "    return false;",
+      "}"
+    ],
+    "description": "Check the response status code"
+  },
+  "multiprocess": {
+    "prefix": "multiprocess",
+    "body": [
+      "public function mainController(\\$params) {",
+      "    \\$proc = new Vtx_Service_Multi_Processor(\\$this, __DIR__ . '/config.json');",
+      "    \\$batchID = time();",
+      "    \\$date = date('Ymd');",
+      "    \\$totalProcess = 15;",
+      "    \\$total = 209;",
+      "    \\$iterate = ceil(\\$total / \\$totalProcess);",
+      "    for (\\$x = 0; \\$x < $total; \\$x += \\$iterate) {",
+      "        \\$start = \\$x;",
+      "        \\$end = \\$start + \\$iterate - 1;",
+      "        li('Starting start - end / Total ' . \\$total);",
+      "        while (!\\$proc->spawnProcess(array('start' => \\$start, 'end' => \\$end, 'batch' => \\$batchID, 'date' => \\$date), array('mem' => 128))) {",
+      "            li('Processing start -- Total ' . \\$total);",
+      "        }",
+      "    }",
+      "    \\$proc->waitTasksCompletion();",
+      "    return \\$this;",
+      "}"
+    ],
+    "description": "Multiprocess module"
+  },
+  "multiif": {
+    "prefix": "multiif",
+    "body": [
+      "            if (\\$i < \\$params['start'] || \\$i > \\$params['end']) {",
+      "                continue;",
+      "            }"
+    ],
+    "description": "Multiprocess if part"
+  },
+  "supp": {
+    "prefix": "supp",
+    "body": [
+      "//to download image",
+      "if (\\$arr['imageurl']) {",
+      "    \\$file = \\$this->addSupportingFile(\\$arr['ImageURL'], \\$arr['SKU']);",
+      "    \\$try = 0;",
+      "    while (filesize(\\$file) == 0 && \\$try <= 7) {",
+      "        \\$file = \\$this->addSupportingFile(\\$arr['ImageURL'], \\$arr['SKU']);",
+      "        \\$try++;",
+      "        sleep(rand(1, 3));",
+      "    }",
+      "    \\$arr['ImageName'] = basename(\\$file);",
+      "}"
+    ]
+  },
+
+  "oxyproxy": {
+    "prefix": "oxyproxy",
+    "body": [
+      "public function switchOxylabsProxy($type = \"dc_shared\") {",
+      "    // required for new ip: https://bugs.php.net/bug.php?id=68211",
+      "    $this->setCurlOption(CURLOPT_FRESH_CONNECT, true);",
+      "    switch ($type) {",
+      "        case \"residential\":",
+      "            li(\"Switching to OxyLabs 'residential' proxy | Country: US\");",
+      "            $this->setProxy('pr.oxylabs.io', '7777', 'customer-grepsr_res_VLtUY-cc-US-sessid-'.md5(microtime()), 'hHXuaG_4s6V74H');",
+      "            break;",
+      "        case \"unblocker\":",
+      "            li(\"Switching to OxyLabs 'unblocker' proxy | Country: US\");",
+      "            $this->setProxy('unblock.oxylabs.io', '60000', 'wgrepsr', 'WKePBu1hybTq2');",
+      "            // $this->setHeaders('x-oxylabs-geo-location', '10013');",
+      "            // $this->setHeaders('X-Oxylabs-Session-Id', uniqid());",
+      "            $this->setCurlOption(CURLOPT_SSL_VERIFYPEER, false);",
+      "            $this->setCurlOption(CURLOPT_SSL_VERIFYHOST, false);",
+      "            break;",
+      "        default:",
+      "            li(\"Switching to OxyLabs 'dc_shared' proxy | Country: US\");",
+      "            $this->setProxy('dc.us-pr.oxylabs.io', '30000', 'sdcgrepsr', 'EmbcmczIJrGU1d^');",
+      "            break;",
+      "    }",
+      "}"
+    ]
+  }
+}
