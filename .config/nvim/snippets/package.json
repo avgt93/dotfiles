@@ -18,6 +18,10 @@
         "path": "./rust.json"
       },
       {
+        "language": "php",
+        "path": "./php.json"
+      },
+      {
         "language": "python",
         "path": "./python.json"
       },

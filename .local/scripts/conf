@@ -46,6 +46,10 @@ case $selected_option in
     "p" | "picom")
         command nvim ~/.config/picom.conf
         ;;
+
+    "ly")
+        command sudoedit /etc/ly/config.ini
+        ;;
     "leftwm" | "wm")
         command nvim ~/.config/leftwm/config.ron
         ;;

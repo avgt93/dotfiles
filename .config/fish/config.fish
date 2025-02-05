@@ -44,8 +44,9 @@ alias space="dust -d 2"
 alias tma="tmux attach -t"
 alias python="python3"
 alias gputop="nvtop"
-
-
+alias gclit="gcli crawler test -s"
+alias fd='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+#alias mirror="xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-3 --mode 1920x1080 --same-as eDP-1 -r 60.00 --rotate normal"
 # Disable ENV prompt since it is already shown on the right side
 set VIRTUAL_ENV_DISABLE_PROMPT 1
 set -gx DBUS_SESSION_BUS_ADDRESS 'unix:path=/run/user/1000/bus'
@@ -64,4 +65,8 @@ if test -z "$QT_QPA_PLATFORMTHEME"
    set -Ux QT_QPA_PLATFORMTHEME qt5ct
 end
 
-pyenv init - | source
+# source /usr/share/nvm/nvm.sh
+# source /usr/share/nvm/bash_completion
+# source /usr/share/nvm/install-nvm-exec
+# source /usr/share/nvm/init-nvm.sh
+# pyenv init - | source
