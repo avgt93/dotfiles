@@ -37,6 +37,10 @@ xmodmap -e "keycode 9 = grave asciitilde"
 xmodmap -e "keycode 64 = keycode 133"
 xmodmap -e "keycode 133 = keycode 64"
 
+/home/avgt/.local/bin/sven unlock &> /dev/null &
+
+pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo
+
 # Hide cursor while typing
 unclutter &> /dev/null &
 
