@@ -4,7 +4,6 @@ if status --is-login
         exec startx -- -keeptty
     end
 end
-
 set fish_greeting
 zoxide init fish | source
 
@@ -16,7 +15,6 @@ end
 set -gx fish_user_paths ~/.local/scripts ~/.local/bin ~/go/bin ~/.cargo/bin /opt/flutter/bin ~/.pub-cache/bin $fish_user_paths /opt/homebrew/bin 
 set -gx SUDO_EDITOR nvim
 set -gx GOPATH ~/go
-
 
 # Alias
 alias gcc="/usr/bin/gcc"
