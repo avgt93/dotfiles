@@ -26,6 +26,8 @@ conform.setup({
 		dart = { "dart_format" },
 
 		php = { "pretty-php" },
+
+		go = { "gofmt", "gofumpt" },
 	},
 
 	format_after_save = {

@@ -69,4 +69,6 @@ end
 # source /usr/share/nvm/bash_completion
 # source /usr/share/nvm/install-nvm-exec
 # source /usr/share/nvm/init-nvm.sh
-# pyenv init - | source
+pyenv init - | source
+atuin init fish | source
+sven export --shell fish | source
