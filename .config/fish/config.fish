@@ -12,10 +12,10 @@ function fish_user_key_bindings
 end
 
 # Paths
-set -gx fish_user_paths ~/.local/scripts ~/.local/bin ~/go/bin ~/.cargo/bin /opt/flutter/bin ~/.pub-cache/bin $fish_user_paths /opt/homebrew/bin 
+set -gx fish_user_paths ~/.local/scripts  ~/.local/bin ~/go/bin ~/.cargo/bin /opt/flutter/bin ~/.pub-cache/bin $fish_user_paths /opt/homebrew/bin ~/snap/bin
 set -gx SUDO_EDITOR nvim
-set -gx GOPATH ~/go
-
+set -gx GOPATH /usr/local/go/bin
+# set -gx JAVA_HOME /usr
 # Alias
 alias gcc="/usr/bin/gcc"
 alias g++="/usr/bin/g++"
@@ -51,7 +51,6 @@ set -gx DBUS_SESSION_BUS_ADDRESS 'unix:path=/run/user/1000/bus'
 set -gx LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/lib64
 set -gx LANG en_US.UTF-8
 set -Ux PYENV_ROOT $HOME/.pyenv
-set -gx JAVA_HOME /opt/android-studio/jbr
 set -gx _JAVA_OPTIONS '-Dawt.useSystemAAFontSettings=on'
 set -gx JAVA_FONTS /usr/share/fonts/TTF
 
@@ -63,10 +62,21 @@ if test -z "$QT_QPA_PLATFORMTHEME"
    set -Ux QT_QPA_PLATFORMTHEME qt5ct
 end
 
+
+atuin init fish | source > /dev/null 2>&1
+pyenv init - | source > /dev/null 2>&1
+sven export --shell fish | source > /dev/null 2>&1
+
 # source /usr/share/nvm/nvm.sh
 # source /usr/share/nvm/bash_completion
 # source /usr/share/nvm/install-nvm-exec
 # source /usr/share/nvm/init-nvm.sh
-pyenv init - | source
-atuin init fish | source
-sven export --shell fish | source
+# pyenv init - fish | source
+# atuin init fish | source
+# sven export --shell fish | source
+
+set -x PKG_CONFIG_PATH /usr/local/lib/pkgconfig $PKG_CONFIG_PATH
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/avgt/.lmstudio/bin
+set -gx DISPLAY :0

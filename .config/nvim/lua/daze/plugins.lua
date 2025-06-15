@@ -4,14 +4,14 @@ return {
 	"lewis6991/impatient.nvim",
 
 	{
-		"vingman",
-		dev = true,
-		dir = vim.fn.expand("~/all/vortex-plugins/wingman-vim"),
-		lazy = false,
+
+		dir = "~/all/vortex-plugins/wingman-vim/",
+		name = "Winger",
+		event = "VeryLazy",
 		config = function()
-			local plugin_path = vim.fn.expand("~/all/vortex-plugins/wingman-vim")
-			package.path = plugin_path .. "/?.lua;" .. package.path
-			require("vingman").setup() -- Load your plugin
+			require("Winger").setup({
+				basePath = "~/all/vortex-plugins/",
+			})
 		end,
 	},
 	{
@@ -120,11 +120,6 @@ return {
 				}
 			end
 		end,
-	},
-	{
-		"microsoft/vscode-js-debug",
-		lazy = true,
-		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	},
 	{
 		"AndrewRadev/tagalong.vim",
