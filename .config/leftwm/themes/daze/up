@@ -11,17 +11,14 @@ ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 
 #boot picom or compton if it exists
-if [ -x "$(command -v picom)" ]; then
-  picom --backend glx &> /dev/null & 
-elif [ -x "$(command -v compton)" ]; then
-  compton &> /dev/null & 
-fi
+picom --backend glx &> /dev/null & 
 
 #set the theme.toml config
-# echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
+echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 leftwm-command "LoadTheme $SCRIPTPATH/theme.toml"
 
 
+echo "$SCRIPTPATH" > ~/test.txt
 #set background
 if [ -x "$(command -v feh)" ]; then
   feh --bg-scale $SCRIPTPATH/background.jpg
@@ -40,11 +37,16 @@ xmodmap -e "keycode 133 = keycode 64"
 /home/avgt/.local/bin/sven unlock &> /dev/null &
 
 pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo
+nm-applet &
 
+xinput set-prop 10 "libinput Tapping Enabled" 1
+xinput set-prop 10 "libinput Natural Scrolling Enabled" 1
+xinput set-prop "Logitech G502 HERO Gaming Mouse" "libinput Natural Scrolling Enabled" 0 &
 # Hide cursor while typing
 unclutter &> /dev/null &
 
 sleep 3
+
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
 leftwm-state -q -n -t $SCRIPTPATH/sizes.liquid | sed -r '/^\s*$/d' | while read -r width x y
@@ -54,5 +56,6 @@ do
   let index=index+1
 done
 
-nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1 > /dev/null
-nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1 > /dev/null
+revert
+# nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1 > /dev/null
+# nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1 > /dev/null

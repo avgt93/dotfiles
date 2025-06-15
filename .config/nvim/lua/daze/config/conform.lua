@@ -25,7 +25,7 @@ conform.setup({
 
 		dart = { "dart_format" },
 
-		php = { "pretty-php" },
+		php = { "pretty-php", "php-cs-fixer" },
 
 		go = { "gofmt", "gofumpt" },
 	},

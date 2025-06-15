@@ -19,6 +19,8 @@ require("lspconfig").intelephense.setup({
 	end,
 })
 
+require("lspconfig").jsonls.setup({})
+
 require("lspconfig").ts_ls.setup({
 	on_attach = function(client, bufnr)
 		-- Disable formatting if you're using another tool like Prettier
