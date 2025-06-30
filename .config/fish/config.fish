@@ -7,6 +7,11 @@ end
 set fish_greeting
 zoxide init fish | source
 
+
+# set -U fish_color_command 'blue'
+set -U fish_color_command blue
+set -U fish_color_command_current cyan
+set -U fish_color_autosuggestion brblack
 function fish_user_key_bindings
   fish_vi_key_bindings
 end
@@ -64,8 +69,8 @@ end
 
 
 atuin init fish | source > /dev/null 2>&1
-pyenv init - | source > /dev/null 2>&1
-sven export --shell fish | source > /dev/null 2>&1
+# pyenv init - | source > /dev/null 2>&1
+# sven export --shell fish | source > /dev/null 2>&1
 
 # source /usr/share/nvm/nvm.sh
 # source /usr/share/nvm/bash_completion
