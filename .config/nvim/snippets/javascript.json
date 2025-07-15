@@ -44,5 +44,22 @@
       "  }",
       "}"
     ]
+  },
+
+  "scalar": {
+    "prefix": "scalar",
+    "description": "NODE Scalar SNIPPET",
+    "body": [
+      "for (let [k, v] of Object.entries(arr)) {",
+      "    if (!isScalar(v)) {",
+      "        v = JSON.stringify(v) || \"\";",
+      "    }",
+      "    arr[k] = v;",
+      "}",
+      "if (isTestEnvironment()) {",
+      "    console.log(arr);",
+      "}",
+      "await handler.dataSet.addRow(arr);"
+    ]
   }
 }
