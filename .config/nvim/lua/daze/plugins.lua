@@ -4,6 +4,27 @@ return {
 	"lewis6991/impatient.nvim",
 
 	{
+		"dense-analysis/ale",
+		config = function()
+			vim.g.ale_linters_explicit = 1
+			vim.g.ale_fix_on_save = 1
+			vim.g.ale_completion_enabled = 0
+			vim.g.ale_linters = {
+				javascript = { "eslint" },
+				python = { "flake8" },
+				lua = { "luacheck" },
+			}
+			vim.g.ale_fixers = {
+				["*"] = { "remove_trailing_lines", "trim_whitespace" },
+				javascript = { "eslint", "prettier" },
+				python = { "black" },
+				lua = { "stylua" },
+				go = { "gofumpt" },
+				php = { "php_cs_fixer" },
+			}
+		end,
+	},
+	{
 
 		dir = "~/all/vortex-plugins/wingman-vim/",
 		name = "Winger",
@@ -14,6 +35,20 @@ return {
 			})
 		end,
 	},
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		lazy = false,
+		opts = {},
+	},
+
+	{
+		"mattn/emmet-vim",
+	},
+
 	{
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
