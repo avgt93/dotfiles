@@ -21,6 +21,7 @@ leftwm-command "LoadTheme $SCRIPTPATH/theme.toml"
 echo "$SCRIPTPATH" > ~/test.txt
 #set background
 if [ -x "$(command -v feh)" ]; then
+  # feh $SCRIPTPATH/background.jpg
   feh --bg-scale $SCRIPTPATH/background.jpg
 fi
 

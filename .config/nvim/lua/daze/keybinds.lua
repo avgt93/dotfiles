@@ -76,9 +76,7 @@
 -- ,,,,
 -- -- Diable Page Up and Down,,,,
 -- "remap(""n""",<PageUp>,<Nop>, opts),
--- "remap(""n""",<PageDown>,<Nop>, opts),
--- "remap(""n""",<S-PageUp>,<Nop>, opts),
--- "remap(""n""",<S-PageDown>,<Nop>, opts),
+-- "remap(""n""",<PageDown>,<Nop>, opts), "remap(""n""",<S-PageUp>,<Nop>, opts), "remap(""n""",<S-PageDown>,<Nop>, opts),
 -- ,,,,
 -- -- JS REMOVE RANDOMASSS CHARACTERS REGEX,,,,
 -- "-- noremap(""n""",<leader>r,<CMD>:%s/%x1b[[0-9;]*m//g <CR>),,
@@ -168,7 +166,7 @@ remap("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
 -- Buffer Navigation
 remap("n", "<leader>n", ":bnext<CR>", opts)
 remap("n", "<leader>b", ":bprevious<CR>", opts)
-remap("n", "<leader>x", ":bd<CR>", opts)
+-- remap("n", "<leader>x", ":bd<CR>", opts)
 remap("n", "<leader>x", "<CMD> lua require('daze.functions').CloseBuffer()<CR>", opts)
 
 -- Git Hunks
@@ -194,6 +192,10 @@ remap("n", "<leader>ca", "<CMD> lua vim.lsp.buf.code_action()<CR>", opts)
 remap("n", "<leader>k", "<CMD> lua vim.lsp.buf.hover()<CR>", opts)
 remap("n", "gi", "<CMD> lua vim.lsp.buf.implementation()<CR>", opts)
 remap("n", "<C-k>", "<CMD> lua vim.lsp.buf.signature_help()<CR>", opts)
+
+-- Move lines up and down
+remap("n", "<S-Down>", ":m .+1<CR>==", opts)
+remap("n", "<S-Up>", ":m .-2<CR>==", opts)
 -- remap("n", "<leader>k", "<C-u>zz", { desc = "Half page up" })
 -- remap("n", "<leader>j", "<C-d>zz", { desc = "Half page down" })
 -- remap("v", "<leader>k", "<C-u>zz", { desc = "Half page up" })
