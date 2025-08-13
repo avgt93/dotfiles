@@ -22,7 +22,7 @@ set -Ux EDITOR vim
 # Paths
 set -gx fish_user_paths ~/.local/scripts  ~/.local/bin ~/go/bin ~/.cargo/bin /opt/flutter/bin ~/.pub-cache/bin $fish_user_paths /opt/homebrew/bin ~/snap/bin /usr/local/go/bin/bin/
 
-set -gx GOOGLE_API_KEY "AIzaSyB56wGLkfPBD7YWdLtd7ABgaCpPiwz0G5E"
+# set -gx GOOGLE_API_KEY ""
 set -gx SUDO_EDITOR nvim
 set -gx GOPATH /usr/local/go/bin
 # set -gx JAVA_HOME /usr
