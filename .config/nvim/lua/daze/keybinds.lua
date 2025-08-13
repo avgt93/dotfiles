@@ -1,7 +1,6 @@
 -- local opts = { noremap = true, silent = true }
 
 -- local remap = vim.api.nvim_set_keymap
-
 -- -- Space key as leader,,,,
 -- remap(""""",<Space>,<Nop>, opts)
 -- "vim.g.mapleader = "" """,,,,
@@ -139,7 +138,28 @@ remap(
 	opts
 )
 remap("n", "<leader><leader>", "<CMD>Telescope buffers<CR>", opts)
-
+remap("n", "<leader>fr", "<CMD>Telescope lsp_references<CR>", opts)
+remap("n", "<leader>fi", "<CMD>Telescope lsp_implementations<CR>", opts)
+remap("n", "<leader>fd", "<CMD>Telescope lsp_definitions<CR>", opts)
+remap("n", "<leader>ft", "<CMD>Telescope lsp_type_definitions<CR>", opts)
+remap("n", "<leader>fc", "<CMD>Telescope lsp_incoming_calls<CR>", opts)
+remap("n", "<leader>fo", "<CMD>Telescope lsp_outgoing_calls<CR>", opts)
+remap("n", "<leader>fs", "<CMD>Telescope lsp_document_symbols<CR>", opts)
+remap("n", "<leader>fS", "<CMD>Telescope lsp_workspace_symbols<CR>", opts)
+remap("n", "<leader>fD", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", opts)
+remap("n", "<leader>fx", "<CMD>Telescope diagnostics<CR>", opts)
+remap("n", "<leader>fX", "<CMD>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<CR>", opts)
+-- builtin.lsp_references 	Lists LSP references for word under the cursor
+-- builtin.lsp_incoming_calls 	Lists LSP incoming calls for word under the cursor
+-- builtin.lsp_outgoing_calls 	Lists LSP outgoing calls for word under the cursor
+-- builtin.lsp_document_symbols 	Lists LSP document symbols in the current buffer
+-- builtin.lsp_workspace_symbols 	Lists LSP document symbols in the current workspace
+-- builtin.lsp_dynamic_workspace_symbols 	Dynamically Lists LSP for all workspace symbols
+-- builtin.diagnostics 	Lists Diagnostics for all open buffers or a specific buffer. Use option bufnr=0 for current buffer.
+-- builtin.lsp_implementations 	Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope
+-- builtin.lsp_definitions 	Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope
+-- builtin.lsp_type_definitions
+--
 -- LSP Binds
 remap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
 remap("n", "<leader>e", "<CMD> lua vim.diagnostic.open_float()<CR>", opts)
