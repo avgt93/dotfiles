@@ -11,6 +11,10 @@ end
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
 
+-- lspkind.lua
+-- local lspkind = require("lspkind")
+
+vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#6CC644" })
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -43,6 +47,7 @@ local kind_icons = {
 	Event = " ",
 	Operator = " ",
 	TypeParameter = " ",
+	Supermaven = "",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -111,7 +116,8 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "copilot" },
+		{ name = "supermaven" },
+		-- { name = "copilot" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },

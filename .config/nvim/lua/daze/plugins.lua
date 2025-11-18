@@ -6,6 +6,7 @@ return {
 	{
 		"dense-analysis/ale",
 		config = function()
+			vim.g.ale_completion_autoimport = 1
 			vim.g.ale_linters_explicit = 1
 			vim.g.ale_fix_on_save = 1
 			vim.g.ale_completion_enabled = 0
@@ -17,11 +18,25 @@ return {
 			vim.g.ale_fixers = {
 				["*"] = { "remove_trailing_lines", "trim_whitespace" },
 				javascript = { "eslint", "prettier" },
+				typescript = { "eslint", "prettier" },
 				python = { "black" },
 				lua = { "stylua" },
 				go = { "gofumpt" },
 				php = { "php_cs_fixer" },
 			}
+		end,
+	},
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			vim.keymap.set("n", "<C-l>", "<Nop>", { silent = true })
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<C-l>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
+			})
 		end,
 	},
 	{
@@ -94,7 +109,7 @@ return {
 			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 			"ibhagwan/fzf-lua", -- for file_selector provider fzf
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			-- "zbirenbaum/copilot.lua", -- for providers='copilot'
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
@@ -445,18 +460,18 @@ return {
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "hrsh7th/cmp-cmdline" },
-			{ "zbirenbaum/copilot-cmp" }, -- Snippets
+			-- { "zbirenbaum/copilot-cmp" }, -- Snippets
 			{ "L3MON4D3/LuaSnip" }, -- Required
 			{ "rafamadriz/friendly-snippets" }, -- Optional
 		},
 		config = function()
 			require("daze.config.lsp-zero")
-			require("daze.config.copilot")
+			-- require("daze.config.copilot")
 		end,
 	},
 
 	-- Github Copilot
-	{ "zbirenbaum/copilot.lua" },
+	-- { "zbirenbaum/copilot.lua" },
 
 	-- Commenting
 	{
