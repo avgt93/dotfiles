@@ -20,34 +20,51 @@ local check_backspace = function()
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
+-- local kind_icons = {
+--     Text = "",             -- unicode book / document
+--     Constructor = "",      -- constructor
+--     Field = "",            -- field / property
+--     Variable = "",         -- variable
+--     Property = "",          -- property
+--     Unit = "",              -- unit
+--     Enum = "",              -- enum
+--     Snippet = "",           -- snippet / template
+--     EnumMember = "",        -- enum member
+--     Struct = "",            -- struct
+--     Event = "",             -- event
+--     Supermaven = "",        -- special/custom star
+-- }
+
 --   פּ ﯟ   some other good icons
 local kind_icons = {
-	Text = " ",
-	Method = "m ",
-	Function = " ",
+	Text = " ", -- unicode book / document
+	Method = " ", -- method icon
+	Function = " ", -- function icon (same as method)
 	Constructor = " ",
 	Field = " ",
 	Variable = " ",
-	Class = " ",
-	Interface = " ",
-	Module = " ",
+	Class = " ", -- class
+
+	Interface = " ", -- interface
+
+	Module = "", -- module / package
 	Property = " ",
 	Unit = " ",
-	Value = " ",
+	Value = " ", -- value / literal
 	Enum = " ",
-	Keyword = " ",
+	Keyword = " ", -- keyword
 	Snippet = " ",
-	Color = " ",
-	File = " ",
+	Color = " ", -- color
+	File = " ", -- file
 	Reference = " ",
-	Folder = " ",
+	Folder = " ", -- folder
 	EnumMember = " ",
-	Constant = " ",
+	Constant = " ", -- constant
 	Struct = " ",
 	Event = " ",
-	Operator = " ",
-	TypeParameter = " ",
-	Supermaven = "",
+	Operator = " ", -- operator
+	TypeParameter = " ", -- type parameter / generic
+	Supermaven = " ",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -87,6 +104,7 @@ cmp.setup({
 			"i",
 			"s",
 		}),
+
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -99,6 +117,10 @@ cmp.setup({
 			"i",
 			"s",
 		}),
+		["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+		["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },

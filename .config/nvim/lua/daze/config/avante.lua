@@ -9,22 +9,42 @@ require("avante").setup({
 
 	provider = "openai",
 	auto_suggestions_provider = "openai",
-	openai = {
-		endpoint = "https://api.deepseek.com/v1",
-		model = "deepseek-chat",
-		timeout = 30000,
-		temperature = 0,
-		max_tokens = 4096,
-		api_key_name = "DEEPSEEK_API_KEY",
-	},
-	vendors = {
+
+	providers = {
+		openai = {
+			endpoint = "https://api.deepseek.com/v1",
+			model = "deepseek-chat",
+			timeout = 30000,
+			api_key_name = "DEEPSEEK_API_KEY",
+			extra_request_body = {
+				temperature = 0,
+				max_tokens = 4096,
+			},
+		},
+
 		deepseek = {
 			__inherited_from = "openai",
-			api_key_name = "DEEPSEEK_API_KEY",
 			endpoint = "https://api.deepseek.com",
 			model = "deepseek-coder",
+			api_key_name = "DEEPSEEK_API_KEY",
 		},
 	},
+	-- openai = {
+	-- 	endpoint = "https://api.deepseek.com/v1",
+	-- 	model = "deepseek-chat",
+	-- 	timeout = 30000,
+	-- 	temperature = 0,
+	-- 	max_tokens = 4096,
+	-- 	api_key_name = "DEEPSEEK_API_KEY",
+	-- },
+	-- vendors = {
+	-- 	deepseek = {
+	-- 		__inherited_from = "openai",
+	-- 		api_key_name = "DEEPSEEK_API_KEY",
+	-- 		endpoint = "https://api.deepseek.com",
+	-- 		model = "deepseek-coder",
+	-- 	},
+	-- },
 	transparent_background = true,
 	compile = { enabled = true },
 	highlight_overrides = {

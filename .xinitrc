@@ -4,9 +4,9 @@
 # dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 #extend
-xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-3 --mode 1920x1080 --left-of eDP-1 -r 75.00 --rotate normal
+# xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-3 --mode 1920x1080 --left-of eDP-1 -r 75.00 --rotate normal
 # xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-3 --mode 1920x1080 --right-of eDP-1 -r 75.00 --rotate normal
-# xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-2 --left-of eDP-1 -r 75.00 --rotate normal
+xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-2 --left-of eDP-1 -r 75.00 --rotate normal
 
 #mirror
 # xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 -r 120.00 --rotate normal --output DP-3 --mode 1920x1080 --same-as eDP-1 -r 60.00 --rotate normal

@@ -58,7 +58,19 @@ require("dashboard").setup({
 			{
 				icon = "  ",
 				desc = "Open Personal dotfiles",
-				action = "Telescope dotfiles path=" .. home .. ".config/nvim",
+				action = function()
+					local dotfiles_path = home .. "/.config/nvim"
+
+					-- Change working directory
+					vim.cmd("cd " .. dotfiles_path)
+
+					-- Open Telescope in that folder
+					require("telescope.builtin").find_files({
+						prompt_title = "Dotfiles",
+						cwd = dotfiles_path,
+						find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" },
+					})
+				end,
 				key = "SPC f d",
 			},
 		},

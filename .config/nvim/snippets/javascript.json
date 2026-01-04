@@ -46,6 +46,39 @@
     ]
   },
 
+  "main": {
+    "prefix": "main",
+    "description": "Queue processing template with CSV and concurrency",
+    "body": [
+      "import { isTestEnvironment } from \"@vortex-ts-sdk/core\";",
+      "import { handler } from \"./handler\";",
+      "import PQueue from \"@vortex-ts-registry/p-queue\";",
+      "import { csvToArray } from \"./utils\";",
+      "import { VtxLogger } from \"@vortex-ts-sdk/vtx-logger\";",
+      "",
+      "async function main() {",
+      "  await handler.main();",
+      "  const CONCURRENCY = isTestEnvironment() ? 1 : 10;",
+      "",
+      "  const queue = new PQueue({ concurrency: CONCURRENCY });",
+      "  const CSV_URL = \"\";",
+      "",
+      "  for await (const { row, index } of csvToArray(CSV_URL)) {",
+      "    VtxLogger.info(`Processing row ${index + 1}`);",
+      "    console.log(row);",
+      "",
+      "    queue.add(async () => {",
+      "      await handler.request.proxy.switch();",
+      "    });",
+      "",
+      "    await queue.onSizeLessThan(CONCURRENCY);",
+      "  }",
+      "}",
+      "",
+      "main().catch((e) => console.error(e));"
+    ]
+  },
+
   "scalar": {
     "prefix": "scalar",
     "description": "NODE Scalar SNIPPET",
