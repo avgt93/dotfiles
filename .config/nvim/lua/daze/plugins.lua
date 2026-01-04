@@ -51,6 +51,48 @@ return {
 		end,
 	},
 	{
+		"NickvanDyke/opencode.nvim",
+		dependencies = {
+			-- Recommended for `ask()` and `select()`.
+			-- Required for `snacks` provider.
+			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+		},
+		config = function()
+			vim.g.opencode_opts = {}
+
+			vim.o.autoread = true
+
+			vim.keymap.set({ "n", "x" }, "<leader>aa", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask opencode" })
+			vim.keymap.set({ "n", "x" }, "<leader>ax", function()
+				require("opencode").select()
+			end, { desc = "Execute opencode action…" })
+			vim.keymap.set({ "n", "t" }, "<leader>.", function()
+				require("opencode").toggle()
+			end, { desc = "Toggle opencode" })
+
+			vim.keymap.set({ "n", "x" }, "go", function()
+				return require("opencode").operator("@this ")
+			end, { expr = true, desc = "Add range to opencode" })
+			vim.keymap.set("n", "goo", function()
+				return require("opencode").operator("@this ") .. "_"
+			end, { expr = true, desc = "Add line to opencode" })
+
+			vim.keymap.set("n", "<S-C-u>", function()
+				require("opencode").command("session.half.page.up")
+			end, { desc = "opencode half page up" })
+			vim.keymap.set("n", "<S-C-d>", function()
+				require("opencode").command("session.half.page.down")
+			end, { desc = "opencode half page down" })
+
+			-- -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+			-- vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+			-- vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+		end,
+	},
+	{
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -84,59 +126,59 @@ return {
 		event = "LspAttach",
 		opts = {},
 	},
-	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		lazy = false,
-		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-		opts = {
-			-- add any opts here
-		},
-		config = function()
-			require("daze.config.avante")
-		end,
-
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-		dependencies = {
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"echasnovski/mini.pick", -- for file_selector provider mini.pick
-			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-			"ibhagwan/fzf-lua", -- for file_selector provider fzf
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			-- "zbirenbaum/copilot.lua", -- for providers='copilot'
-			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-			},
-		},
-	},
+	-- {
+	-- 	"yetone/avante.nvim",
+	-- 	event = "VeryLazy",
+	-- 	lazy = false,
+	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+	-- 	opts = {
+	-- 		-- add any opts here
+	-- 	},
+	-- 	config = function()
+	-- 		require("daze.config.avante")
+	-- 	end,
+	--
+	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+	-- 	build = "make",
+	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+	-- 	dependencies = {
+	-- 		"stevearc/dressing.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		--- The below dependencies are optional,
+	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
+	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
+	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+	-- 		-- "zbirenbaum/copilot.lua", -- for providers='copilot'
+	-- 		{
+	-- 			-- support for image pasting
+	-- 			"HakonHarnes/img-clip.nvim",
+	-- 			event = "VeryLazy",
+	-- 			opts = {
+	-- 				-- recommended settings
+	-- 				default = {
+	-- 					embed_image_as_base64 = false,
+	-- 					prompt_for_file_name = false,
+	-- 					drag_and_drop = {
+	-- 						insert_mode = true,
+	-- 					},
+	-- 					-- required for Windows users
+	-- 					use_absolute_path = true,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		{
+	-- 			-- Make sure to set this up properly if you have lazy=true
+	-- 			"MeanderingProgrammer/render-markdown.nvim",
+	-- 			opts = {
+	-- 				file_types = { "markdown", "Avante" },
+	-- 			},
+	-- 			ft = { "markdown", "Avante" },
+	-- 		},
+	-- 	},
+	-- },
 	-- Autopair
 	{
 		"windwp/nvim-autopairs",
@@ -269,9 +311,9 @@ return {
 					-- Format the diagnostic message.
 					-- Example:
 					format = function(diagnostic)
-						return diagnostic.message .. " [" .. diagnostic.source .. "]"
-					end,
-					-- format = nil,
+						local source = diagnostic.source or "LSP" -- fallback if nil
+						return source .. ": " .. diagnostic.message
+					end, -- format = nil,
 
 					--- Enable it if you want to always have message with `after` characters length.
 					break_line = {
@@ -351,7 +393,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-telescope/telescope.nvim", -- optional
-			"neovim/nvim-lspconfig", -- optional
+			-- "neovim/nvim-lspconfig", -- optional
 		},
 		opts = {}, -- your configuration
 	},
@@ -404,7 +446,6 @@ return {
 				options = {
 					offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
 				},
-				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 			})
 		end,
 	},
@@ -417,7 +458,12 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("nvim-tree").setup({})
+			require("nvim-tree").setup({
+				update_focused_file = {
+					enable = true,
+					update_root = false, -- set to true if you want the tree root to follow as well
+				},
+			})
 		end,
 	},
 
@@ -525,7 +571,8 @@ return {
 	{
 		"ggandor/leap.nvim",
 		config = function()
-			require("leap").add_default_mappings()
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 		end,
 	},
 	--
@@ -647,14 +694,6 @@ return {
 		},
 		-- Add custom colours
 		winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-	},
-
-	-- Repeat
-	{
-		"tpope/vim-repeat",
-		config = function()
-			require("leap").add_default_mappings()
-		end,
 	},
 
 	-- Git Plugin
