@@ -43,6 +43,7 @@ alias lg="lazygit"
 alias gch="git checkout"
 alias ls="exa"
 alias la="exa -la"
+alias code="antigravity"
 alias sync='osync.sh ~/.config/osync/sync.conf'
 # alias yay="paru --color always"
 alias du="du -h"

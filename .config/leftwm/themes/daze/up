@@ -11,7 +11,7 @@ ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 
 #boot picom or compton if it exists
-picom --backend glx &> /dev/null & 
+picom --backend glx &> /dev/null &
 
 #set the theme.toml config
 echo "LoadTheme $SCRIPTPATH/theme.ron" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
@@ -34,6 +34,7 @@ setxkbmap -option altwin:swap_lalt_lwin
 xmodmap -e "keycode 9 = grave asciitilde"
 xmodmap -e "keycode 64 = keycode 133"
 xmodmap -e "keycode 133 = keycode 64"
+# xdotool key Caps_Lock
 
 /home/avgt/.local/bin/sven unlock &> /dev/null &
 
@@ -51,7 +52,7 @@ sleep 3
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
 leftwm-state -q -n -t $SCRIPTPATH/sizes.liquid | sed -r '/^\s*$/d' | while read -r width x y
-do 
+do
   barname="mainbar$index"
   monitor=$monitor offsetx=$x width=$width polybar -c $SCRIPTPATH/polybar.config $barname &> /dev/null &
   let index=index+1
