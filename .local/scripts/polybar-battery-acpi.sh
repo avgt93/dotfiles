@@ -78,10 +78,7 @@ color=$COLOR_CRIT
 elif (( percent <= LOW )); then
 color=$COLOR_LOW
 fi
-
-
-# build output for polybar (use polybar's formatting tags)
-# build output for polybar (use polybar's formatting tags)
+# build output for polybar (use polybar's formatting tags) build output for polybar (use polybar's formatting tags)
 # example output: %{F#61AFEF} 87% %{F-}01:12
 if [[ -n "$time_str" && "$time_str" != "" ]]; then
     # shorten time like 01:23:45 remaining -> 01:23

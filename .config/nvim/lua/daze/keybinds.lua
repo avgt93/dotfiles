@@ -52,16 +52,6 @@ remap("n", "<leader>fS", "<CMD>Telescope lsp_workspace_symbols<CR>", opts)
 remap("n", "<leader>fD", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", opts)
 remap("n", "<leader>fx", "<CMD>Telescope diagnostics<CR>", opts)
 remap("n", "<leader>fX", "<CMD>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<CR>", opts)
--- builtin.lsp_references 	Lists LSP references for word under the cursor
--- builtin.lsp_incoming_calls 	Lists LSP incoming calls for word under the cursor
--- builtin.lsp_outgoing_calls 	Lists LSP outgoing calls for word under the cursor
--- builtin.lsp_document_symbols 	Lists LSP document symbols in the current buffer
--- builtin.lsp_workspace_symbols 	Lists LSP document symbols in the current workspace
--- builtin.lsp_dynamic_workspace_symbols 	Dynamically Lists LSP for all workspace symbols
--- builtin.diagnostics 	Lists Diagnostics for all open buffers or a specific buffer. Use option bufnr=0 for current buffer.
--- builtin.lsp_implementations 	Goto the implementation of the word under the cursor if there's only one, otherwise show all options in Telescope
--- builtin.lsp_definitions 	Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope
--- builtin.lsp_type_definitions
 --
 -- LSP Binds
 remap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
@@ -119,6 +109,7 @@ remap("n", "<C-k>", "<CMD> lua vim.lsp.buf.signature_help()<CR>", opts)
 -- Move lines up and down
 remap("n", "<S-Down>", ":m .+1<CR>==", opts)
 remap("n", "<S-Up>", ":m .-2<CR>==", opts)
+
 -- remap("n", "<leader>k", "<C-u>zz", { desc = "Half page up" })
 -- remap("n", "<leader>j", "<C-d>zz", { desc = "Half page down" })
 -- remap("v", "<leader>k", "<C-u>zz", { desc = "Half page up" })
@@ -139,8 +130,11 @@ remap("n", "<leader>ds", "<CMD>lua require('dap').step_over()<CR>", opts)
 remap("n", "<leader>dt", "<CMD>lua require('dap').terminate()<CR>", opts)
 remap("n", "<leader>dd", "<CMD>lua require('dap').disconnect({ terminateDebuggee = false })<CR>", opts)
 remap("n", "<leader>dr", "<CMD>lua require('dap').restart()<CR>", opts)
+remap("n", "<leader>dl", "<CMD>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point: '))<CR>", opts)
 -- remap("n", "<leader>dl", "<CMD>lua require('dap').run_last()<CR>", opts)
 remap("n", "<leader>dw", "<CMD>lua require('dap').repl.open()<CR>", opts)
 remap("n", "<leader>du", "<CMD>lua require('dapui').toggle()<CR>", opts)
-
-remap("n", "<leader>dl", "<CMD>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point: '))<CR>", opts)
+remap("n", "<leader>dh", "<Cmd>lua require('dapui').hover()<CR>", opts)
+remap("x", "<leader>R", "<CMD>lua require('refactoring').select_refactor()<CR>", opts)
+remap("n", "<leader>R", "<CMD>lua require('refactoring').select_refactor()<CR>", opts)
+-- Normal mode hover over variable under cursor

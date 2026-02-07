@@ -2,30 +2,11 @@ return {
 	"wbthomason/packer.nvim",
 	"nvim-lua/plenary.nvim",
 	"lewis6991/impatient.nvim",
-
-	{
-		"dense-analysis/ale",
-		config = function()
-			vim.g.ale_completion_autoimport = 1
-			vim.g.ale_linters_explicit = 1
-			vim.g.ale_fix_on_save = 1
-			vim.g.ale_completion_enabled = 0
-			vim.g.ale_linters = {
-				javascript = { "eslint" },
-				python = { "flake8" },
-				lua = { "luacheck" },
-			}
-			vim.g.ale_fixers = {
-				["*"] = { "remove_trailing_lines", "trim_whitespace" },
-				javascript = { "eslint", "prettier" },
-				typescript = { "eslint", "prettier" },
-				python = { "black" },
-				lua = { "stylua" },
-				go = { "gofumpt" },
-				php = { "php_cs_fixer" },
-			}
-		end,
-	},
+	-- {
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	-- 	opts = {},
+	-- },
 	{
 		"supermaven-inc/supermaven-nvim",
 		config = function()
@@ -40,7 +21,49 @@ return {
 		end,
 	},
 	{
+		"ThePrimeagen/99",
+		config = function()
+			local _99 = require("99")
 
+			local cwd = vim.uv.cwd()
+			local basename = vim.fs.basename(cwd)
+			_99.setup({
+				logger = {
+					level = _99.DEBUG,
+					path = "/tmp/" .. basename .. ".99.debug",
+					print_on_error = true,
+				},
+				model = "google/antigravity-gemini-3-flash",
+
+				completion = {
+					custom_rules = {
+						"scratch/custom_rules/",
+					},
+					source = "cmp",
+				},
+
+				md_files = {
+					"AGENT.md",
+				},
+			})
+
+			vim.keymap.set("n", "<leader>99", function()
+				_99.fill_in_function()
+			end)
+			vim.keymap.set("v", "<leader>90", function()
+				_99.visual()
+			end)
+
+			vim.keymap.set("v", "<leader>9s", function()
+				_99.stop_all_requests()
+			end)
+
+			vim.keymap.set("n", "<leader>98", function()
+				_99.fill_in_function_prompt()
+			end)
+		end,
+	},
+	{
 		dir = "~/all/vortex-plugins/wingman-vim/",
 		name = "Winger",
 		event = "VeryLazy",
@@ -99,6 +122,22 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		lazy = false,
+		config = function()
+			require("refactoring").setup({
+				prompt_func_return_type = {
+					go = true,
+					cpp = true,
+					c = true,
+					java = true,
+				},
+				prompt_func_param_type = {
+					go = true,
+					cpp = true,
+					c = true,
+					java = true,
+				},
+			})
+		end,
 		opts = {},
 	},
 
@@ -110,12 +149,8 @@ return {
 		"rachartier/tiny-code-action.nvim",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
-
-			-- optional picker via telescope
 			{ "nvim-telescope/telescope.nvim" },
-			-- optional picker via fzf-lua
 			{ "ibhagwan/fzf-lua" },
-			-- .. or via snacks
 			{
 				"folke/snacks.nvim",
 				opts = {
@@ -126,60 +161,6 @@ return {
 		event = "LspAttach",
 		opts = {},
 	},
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	lazy = false,
-	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-	-- 	opts = {
-	-- 		-- add any opts here
-	-- 	},
-	-- 	config = function()
-	-- 		require("daze.config.avante")
-	-- 	end,
-	--
-	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-	-- 	build = "make",
-	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-	-- 	dependencies = {
-	-- 		"stevearc/dressing.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		--- The below dependencies are optional,
-	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
-	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
-	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-	-- 		-- "zbirenbaum/copilot.lua", -- for providers='copilot'
-	-- 		{
-	-- 			-- support for image pasting
-	-- 			"HakonHarnes/img-clip.nvim",
-	-- 			event = "VeryLazy",
-	-- 			opts = {
-	-- 				-- recommended settings
-	-- 				default = {
-	-- 					embed_image_as_base64 = false,
-	-- 					prompt_for_file_name = false,
-	-- 					drag_and_drop = {
-	-- 						insert_mode = true,
-	-- 					},
-	-- 					-- required for Windows users
-	-- 					use_absolute_path = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	-- },
-	-- Autopair
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -198,17 +179,22 @@ return {
 		"davidosomething/format-ts-errors.nvim",
 		config = function()
 			require("format-ts-errors").setup({
-				add_markdown = true, -- wrap output with markdown ```ts ``` markers
-				start_indent_level = 1, -- initial indent
+				add_markdown = true,
+				start_indent_level = 1,
 			})
 		end,
 	},
 	{
-		"mxsdev/nvim-dap-vscode-js",
-		dependencies = { "mfussenegger/nvim-dap" },
+		"MeanderingProgrammer/render-markdown.nvim",
+		-- dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+		---@module 'render-markdown'
+		opts = {},
 	},
 	{
-		"AndrewRadev/tagalong.vim",
+		"mxsdev/nvim-dap-vscode-js",
+		dependencies = { "mfussenegger/nvim-dap" },
 	},
 	{
 		"windwp/nvim-ts-autotag",
@@ -269,7 +255,7 @@ return {
 					softwrap = 15,
 
 					-- If multiple diagnostics are under the cursor, display all of them.
-					multiple_diag_under_cursor = false,
+					multiple_diag_under_cursor = true,
 
 					-- Enable diagnostic message on all lines.
 					multilines = false,
@@ -325,7 +311,7 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		opts = {},
 		cmd = "Trouble",
 		keys = {
 			{
@@ -371,7 +357,9 @@ return {
 		},
 		opts = {}, -- your configuration
 	},
+
 	{ "djoshea/vim-autoread" },
+
 	-- Theme
 	{
 		"catppuccin/nvim",
@@ -490,9 +478,6 @@ return {
 		end,
 	},
 
-	-- Github Copilot
-	-- { "zbirenbaum/copilot.lua" },
-
 	-- Commenting
 	{
 		"numToStr/Comment.nvim",
@@ -549,50 +534,6 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
 		end,
 	},
-	--
-	-- {
-	--     "lewis6991/hover.nvim",
-	--     config = function()
-	--         require("hover").setup {
-	--             init = function()
-	--                 -- Require providers
-	--                 require("hover.providers.lsp")
-	--                 -- require('hover.providers.gh')
-	--                 -- require('hover.providers.gh_user')
-	--                 -- require('hover.providers.jira')
-	--                 -- require('hover.providers.dap')
-	--                 -- require('hover.providers.man')
-	--                 -- require('hover.providers.dictionary')
-	--             end,
-	--             preview_opts = {
-	--                 border = 'single'
-	--             },
-	--
-	--                 keymaps = {
-	--                 hover = '<C-]>',
-	--
-	--                 },
-	--             -- Whether the contents of a currently open hover window should be moved
-	--             -- to a :h preview-window when pressing the hover keymap.
-	--             preview_window = false,
-	--             title = true,
-	--             mouse_providers = {
-	--                 'LSP'
-	--             },
-	--             mouse_delay = 1000
-	--         }
-	--
-	--         -- Setup keymaps
-	--         -- vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
-	--         -- vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-	--         -- vim.keymap.set("n", "<C-p>", function() require("hover").hover_switch("previous") end, { desc = "hover.nvim (previous source)" })
-	--         -- vim.keymap.set("n", "<C-n>", function() require("hover").hover_switch("next") end, { desc = "hover.nvim (next source)" })
-	--         --
-	--         -- -- Mouse support
-	--         -- vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
-	--         -- vim.o.mousemoveevent = true
-	--     end
-	-- },
 	{
 		"ggandor/flit.nvim",
 		config = function()
@@ -607,88 +548,13 @@ return {
 			})
 		end,
 	},
-	{
-		"piersolenski/wtf.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-		opts = {},
-		keys = {
-			{
-				"<leader>wa",
-				mode = { "n", "x" },
-				function()
-					require("wtf").ai()
-				end,
-				desc = "Debug diagnostic with AI",
-			},
-			{
-				mode = { "n" },
-				"<leader>ws",
-				function()
-					require("wtf").search()
-				end,
-				desc = "Search diagnostic with Google",
-			},
-			{
-				mode = { "n" },
-				"<leader>wh",
-				function()
-					require("wtf").history()
-				end,
-				desc = "Populate the quickfix list with previous chat history",
-			},
-			{
-				mode = { "n" },
-				"<leader>wg",
-				function()
-					require("wtf").grep_history()
-				end,
-				desc = "Grep previous chat history with Telescope",
-			},
-		},
-		-- Default AI popup type
-		-- popup_type = "popup" | "horizontal" | "vertical",
-		popup_type = "popup",
-		-- An alternative way to set your API key
-		-- ChatGPT Model
-		openai_model_id = "gpt-3.5-turbo",
-		-- Send code as well as diagnostics
-		context = true,
-		-- Set your preferred language for the response
-		language = "english",
-		-- Any additional instructions
-		-- Default search engine, can be overridden by passing an option to WtfSeatch
-		-- search_engine = "google" | "duck_duck_go" | "stack_overflow" | "github" | "phind" | "perplexity",
-		search_engine = "google",
-		-- Callbacks
-		hooks = {
-			request_started = nil,
-			request_finished = nil,
-		},
-		-- Add custom colours
-		winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-	},
 
 	-- Git Plugin
 	{ "tpope/vim-fugitive" },
-
 	{ "ron-rs/ron.vim" },
-
 	{ "stevearc/dressing.nvim" },
 
-	-- Dart & Flutter Plugin
-	-- use {
-	--     'akinsho/flutter-tools.nvim',
-	--     config = function() require("daze.config.flutter-tools") end
-	-- }
 	{ "ThePrimeagen/vim-be-good" },
 	{ "tikhomirov/vim-glsl" },
 	--
-	-- 	{
-	-- 		"karb94/neoscroll.nvim",
-	-- 		config = function()
-	-- 			require("daze.config.neoscroll")
-	-- 		end,
-	-- 	},
 }
