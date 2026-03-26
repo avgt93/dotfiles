@@ -1,22 +1,26 @@
 local dap, dapui = require("dap"), require("dapui")
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-	vim.schedule(function()
-		if vim.api.nvim_get_current_buf() ~= -1 then
-			pcall(dapui.open)
-		end
-	end)
+local function setup_listeners()
+	dap.listeners.after.event_initialized["dapui_config"] = function()
+		vim.schedule(function()
+			if vim.api.nvim_get_current_buf() ~= -1 then
+				pcall(dapui.open)
+			end
+		end)
+	end
+
+	dap.listeners.before.event_terminated["dapui_config"] = function()
+		pcall(dapui.close)
+	end
+
+	dap.listeners.before.event_exited["dapui_config"] = function()
+		pcall(dapui.close)
+	end
 end
 
-dap.listeners.before.event_terminated["dapui_config"] = function()
-	pcall(dapui.close)
-end
+setup_listeners()
 
-dap.listeners.before.event_exited["dapui_config"] = function()
-	pcall(dapui.close)
-end
-
-require("dapui").setup({
+dapui.setup({
 	layouts = {
 		{
 			elements = { "scopes", "breakpoints", "stacks", "watches" },

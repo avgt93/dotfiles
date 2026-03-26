@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -z $1 ]]; then
-    options=("gcli" "zsh" "tmux" "bash" "fish" "alacritty" "neovim" "installscript" "vifm" "xinitrc" "rofi" "picom" "leftwm" "shkd" "theme" "scripts" "conf")
+    options=("gcli" "zsh" "tmux" "bash" "fish" "alacritty" "neovim" "installscript" "vifm" "xinitrc" "rofi" "picom" "leftwm" "shkd" "theme" "scripts" "conf" "opencode" "commit-gen")
     selected_option=$(printf '%s\n' "${options[@]}" | fzf)
     if [[ -z $selected_option ]]; then
         exit 0
@@ -13,6 +13,13 @@ fi
 case $selected_option in
     "gcli")
         command nvim ~/.grepsr/config.yml
+        ;;
+    "opencode")
+        command nvim ~/.config/opencode/opencode.json  
+        ;;
+
+    "commit-gen")
+        command nvim ~/.config/commit-gen/config.yaml 
         ;;
     "zsh" | "z")
         command nvim ~/.zshrc && source ~/.zshrc

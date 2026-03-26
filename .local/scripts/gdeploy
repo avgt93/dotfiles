@@ -1,0 +1,9 @@
+folder="$1"
+git add "$folder" && 
+
+commit_msg=$(commit-gen generate --dry-run)
+echo "Deploying $folder"
+echo "Commit message: $commit_msg"
+
+gcli crawler deploy -s "$folder" -m "$commit_msg"
+
