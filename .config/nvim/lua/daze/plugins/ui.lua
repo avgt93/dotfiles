@@ -48,6 +48,7 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
+		dependencies = { "catppuccin" },
 		config = function()
 			require("daze.config.lualine")
 		end,

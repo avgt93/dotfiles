@@ -38,23 +38,23 @@ text = "0x1c1f24"
 TERM = "xterm-256color"
 
 [font]
-size = 10
+size = 15
 
 [font.bold]
-family = "iosevka Nerd Font"
-style = "Bold"
+family = "Iosevka Nerd Font"
+style = "SemiBold"
 
 [font.bold_italic]
-family = "iosevka Nerd Font"
-style = "Bold Italic"
+family = "Iosevka Nerd Font"
+style = "Light Italic"
 
 [font.italic]
-family = "iosevka Nerd Font"
+family = "Iosevka Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "iosevka Nerd Font"
-style = "Regular"
+family = "Iosevka Nerd Font"
+style = "Light"
 
 [font.offset]
 x = 0

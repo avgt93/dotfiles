@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -z $1 ]]; then
-    options=("gcli" "zsh" "tmux" "bash" "fish" "alacritty" "neovim" "installscript" "vifm" "xinitrc" "rofi" "picom" "leftwm" "shkd" "theme" "scripts" "conf" "opencode" "commit-gen")
+    options=("yabai" "scratchpad" "gcli" "zsh" "tmux" "bash" "fish" "alacritty" "neovim" "installscript" "vifm" "xinitrc" "rofi" "picom" "leftwm" "shkd" "theme" "scripts" "conf" "opencode" "commit-gen")
     selected_option=$(printf '%s\n' "${options[@]}" | fzf)
     if [[ -z $selected_option ]]; then
         exit 0
@@ -18,6 +18,12 @@ case $selected_option in
         command nvim ~/.config/opencode/opencode.json  
         ;;
 
+    "yabai")
+        command nvim ~/.config/yabai/yabairc
+        ;;
+    "scratchpad")
+        command nvim ~/.config/scratchpad/config.toml
+        ;;
     "commit-gen")
         command nvim ~/.config/commit-gen/config.yaml 
         ;;

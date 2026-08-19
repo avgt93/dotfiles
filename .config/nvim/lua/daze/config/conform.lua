@@ -1,36 +1,53 @@
 local conform = require("conform")
 
 conform.setup({
-	formatters_by_ft = {
-		lua = { "stylua" },
+    formatters_by_ft = {
+        lua = { "stylua" },
 
-		python = { "isort", "black" },
+        python = { "isort", "black" },
 
-		javascript = { "prettier" },
+        javascript = { "prettier" },
+        html = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        javascriptreact = { "prettier" },
+        css = { "prettier" },
+        json = { "prettier" },
 
-		html = { "prettier" },
+        rust = { "rustfmt" },
+        dart = { "dart_format" },
 
-		typescript = { "prettier" },
+        php = { "pretty-php", "php-cs-fixer" },
 
-		typescriptreact = { "prettier" },
+        go = { "gofmt", "gofumpt" },
+    },
 
-		javascriptreact = { "prettier" },
+    format_after_save = {
+        lsp_format = "fallback",
+    },
 
-		css = { "prettier" },
+    notify_no_formatters = true,
 
-		json = { "prettier" },
+    formatters = {
+        prettier = {
+            prepend_args = { "--tab-width", "2" },
+        },
 
-		rust = { "rustfmt" },
+        sh = {
+            prepend_args = { "-i", "2" },
+        },
 
-		dart = { "dart_format" },
+        black = {
+            prepend_args = { "--line-length", "80" },
+        },
 
-		php = { "pretty-php", "php-cs-fixer" },
+        isort = {
+            prepend_args = { "--profile", "black" },
+        },
 
-		go = { "gofmt", "gofumpt" },
-	},
+        stylua = {
+            prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+        },
 
-	format_after_save = {
-		lsp_format = "fallback",
-	},
-	notify_no_formatters = true,
+    },
 })

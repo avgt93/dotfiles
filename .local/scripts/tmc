@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-tmux -u has-session -t $1 > /dev/null 2>&1 
-if [ $? ]
-then
-  command tmux -u new-session -d -s $1 > /dev/null 2>&1
+if ! tmux -u has-session -t "$1" > /dev/null 2>&1; then
+  command tmux -u new-session -d -s "$1" /opt/homebrew/bin/fish -l > /dev/null 2>&1
 fi
 
-tmux -u attach -t $1
+tmux -u attach -t "$1"

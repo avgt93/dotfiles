@@ -33,7 +33,7 @@
       "        break;",
       "      }",
       "      VtxLogger.info(",
-      "        `Response status code: ${response.getStatusCode()}, retry: ${retry}`,",
+      "        `Response status code: ${response.getStatusCode()}, retry: \\${retry}`,",
       "      );",
       "",
       "      await sleep(4000);",

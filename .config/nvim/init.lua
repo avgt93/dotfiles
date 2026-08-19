@@ -22,6 +22,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 
+
 -- auto complete
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
@@ -31,7 +32,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-vim.cmd("set completeopt+=noselect")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "sh", "dotenv" },
+  callback = function()
+    if vim.fn.expand("%:t"):match("^%.env") then
+      vim.bo.commentstring = "# %s"
+    end
+  end,
+})vim.cmd("set completeopt+=noselect")
 
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3

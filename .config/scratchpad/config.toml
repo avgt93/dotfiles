@@ -8,16 +8,27 @@ target = "Telegram"
 position = [290, 175]
 size = [1100, 700]
 launch_type = "app"
-launch_command = "Telegram.app"
+launch_command = "Telegram Desktop.app"
+
+[[scratchpad]]
+name = "finder"
+target_type = "app"
+target = "Finder"
+position = [290, 175]
+size = [1100, 700]
+launch_type = "app"
+launch_command = "Finder.app"
 
 [[scratchpad]]
 name = "alacritty"
 target_type = "title"
 target = "AlacrittyScratchpad"
-position = [290, 175]
-size = [1100, 700]
+position = [1, 1]
+size = [6, 6]
+rows = 8
+cols = 8
 launch_type = "app_with_arg"
-launch_command = ["Alacritty.app", "--title", "AlacrittyScratchpad"]
+launch_command = ["Alacritty.app", "--title", "AlacrittyScratchpad", "-e", "/Users/avgt/.local/scripts/tmc", "main"]
 
 [[scratchpad]]
 name = "discord"
@@ -27,3 +38,31 @@ position = [290, 175]
 size = [1100, 700]
 launch_type = "app"
 launch_command = "Discord.app"
+    
+
+[[scratchpad]]
+name = "obsidian"
+target_type = "app"
+target = "Obsidian"
+position = [290, 175]
+size = [1100, 700]
+launch_type = "app"
+launch_command = "Obsidian.app"
+
+[[scratchpad]]
+name = "spotify"
+target_type = "app"
+target = "Spotify"
+position = [290, 175]
+size = [1100, 700]
+launch_type = "app"
+launch_command = "Spotify.app"
+
+[[scratchpad]]
+name = "slack"
+target_type = "app"
+target = "Slack"
+position = [290, 175]
+size = [1100, 700]
+launch_type = "app"
+launch_command = "Slack.app"

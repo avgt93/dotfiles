@@ -24,7 +24,7 @@
       "    \\$totalProcess = 15;",
       "    \\$total = 209;",
       "    \\$iterate = ceil(\\$total / \\$totalProcess);",
-      "    for (\\$x = 0; \\$x < $total; \\$x += \\$iterate) {",
+      "    for (\\$x = 0; \\$x < \\$total; \\$x += \\$iterate) {",
       "        \\$start = \\$x;",
       "        \\$end = \\$start + \\$iterate - 1;",
       "        li('Starting start - end / Total ' . \\$total);",

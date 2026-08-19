@@ -1,9 +1,13 @@
 folder="$1"
-git add "$folder" && 
+
+git add "$folder" &&
 
 commit_msg=$(commit-gen generate --dry-run)
+
+# Escape backslashes first, then double quotes
+escaped_commit_msg=$(printf '%s' "$commit_msg" | sed 's/\\/\\\\/g; s/"/\\"/g')
+
 echo "Deploying $folder"
 echo "Commit message: $commit_msg"
 
-gcli crawler deploy -s "$folder" -m "$commit_msg"
-
+gcli crawler deploy -s "$folder" -m "$escaped_commit_msg"

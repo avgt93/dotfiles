@@ -35,10 +35,10 @@ remap("v", "<leader>/", '<ESC><CMD> lua require("Comment.api").toggle.linewise(v
 -- Telescope Binds
 remap("n", "<leader>ff", "<CMD>Telescope find_files<CR>", opts)
 remap(
-	"n",
-	"<leader>fw",
-	":lua require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' }})<CR>",
-	opts
+    "n",
+    "<leader>fw",
+    ":lua require('telescope.builtin').live_grep({ additional_args = { '--fixed-strings' }})<CR>",
+    opts
 )
 remap("n", "<leader><leader>", "<CMD>Telescope buffers<CR>", opts)
 remap("n", "<leader>fr", "<CMD>Telescope lsp_references<CR>", opts)
@@ -60,10 +60,10 @@ remap("n", "<leader>[", "<CMD> lua vim.diagnostic.goto_prev()<CR>", opts)
 remap("n", "<leader>]", "<CMD> lua vim.diagnostic.goto_next()<CR>", opts)
 remap("n", "<leader>q", "<CMD> lua vim.diagnostic.setloclist()<CR>", opts)
 remap("n", "gD", "<CMD> lua vim.lsp.buf.declaration()<CR>", opts)
-remap("n", "gd", "<CMD> lua vim.lsp.buf.implementation()<CR>", opts)
+remap("n", "gi", "<CMD> lua vim.lsp.buf.implementation()<CR>", opts)
 remap("n", "<leader>ca", "<CMD> lua vim.lsp.buf.code_action()<CR>", opts)
 remap("n", "<leader>k", "<CMD> lua vim.lsp.buf.hover()<CR>", opts)
-remap("n", "gi", "<CMD> lua vim.lsp.buf.definition()<CR>", opts)
+remap("n", "gd", "<CMD> lua vim.lsp.buf.definition()<CR>", opts)
 remap("n", "<C-k>", "<CMD> lua vim.lsp.buf.signature_help()<CR>", opts)
 
 -- Select all
