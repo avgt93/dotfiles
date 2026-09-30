@@ -1,0 +1,4 @@
+WRN 2026-09-28T13:01:47.432 ?.7368     server_start:197: Failed to start server: operation not permitted: /var/folders/yq/v9505mys7pn__cxv1ffvpk300000gn/T/nvim.avgt/WfvUWA/nvim.7368.0
+WRN 2026-09-28T13:02:08.252 ?.7632     server_start:197: Failed to start server: operation not permitted: /var/folders/yq/v9505mys7pn__cxv1ffvpk300000gn/T/nvim.avgt/sfj8CM/nvim.7632.0
+WRN 2026-09-28T13:02:26.638 ?.7736     server_start:197: Failed to start server: operation not permitted: /var/folders/yq/v9505mys7pn__cxv1ffvpk300000gn/T/nvim.avgt/aeuWKN/nvim.7736.0
+WRN 2026-09-28T13:02:42.083 ?.7797     server_start:197: Failed to start server: operation not permitted: /var/folders/yq/v9505mys7pn__cxv1ffvpk300000gn/T/nvim.avgt/0c7RRg/nvim.7797.0
